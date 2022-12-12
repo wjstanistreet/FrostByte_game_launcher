@@ -16,8 +16,11 @@ public class DataLoader implements ApplicationRunner {
     @Autowired
     GameRepository gameRepository;
 
+    public DataLoader(){}
+
     @Override
     public void run(ApplicationArguments args) throws Exception {
+        //
 
     }
 
