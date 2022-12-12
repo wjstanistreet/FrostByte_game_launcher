@@ -1,5 +1,8 @@
 package com.example.frostbyte_game_launcher.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Account {
 
     private long id;
@@ -7,6 +10,7 @@ public class Account {
     private String password;
     private String dateOfBirth;
     private String email;
+    private List<Game> installGames;
 
     public Account (){};
 
@@ -15,6 +19,7 @@ public class Account {
         this.password = password;
         this.dateOfBirth = dateOfBirth;
         this.email = email;
+        this.installGames = new ArrayList<>();
     }
 
     public long getId() {
@@ -55,5 +60,13 @@ public class Account {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<Game> getInstallGames() {
+        return installGames;
+    }
+
+    public void setInstallGames(List<Game> installGames) {
+        this.installGames = installGames;
     }
 }
