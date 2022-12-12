@@ -4,6 +4,7 @@ import com.example.frostbyte_game_launcher.models.Account;
 import com.example.frostbyte_game_launcher.models.Game;
 import com.example.frostbyte_game_launcher.repositories.AccountRepository;
 import com.example.frostbyte_game_launcher.repositories.GameRepository;
+import com.example.frostbyte_game_launcher.services.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -17,6 +18,9 @@ public class DataLoader implements ApplicationRunner {
 
     @Autowired
     GameRepository gameRepository;
+
+    @Autowired
+    AccountService accountService;
 
     public DataLoader(){}
 
@@ -61,6 +65,10 @@ public class DataLoader implements ApplicationRunner {
         Account accountFour = new Account("Fatimah Patel", "11111", "03/03/1993", "fatimah@fatimah.com");
         accountRepository.save(accountFour);
 
+        //Adding games to accounts
+        accountService.addGameToAccount(godOfWar, accountOne);
+        accountService.addGameToAccount(godOfWar, accountFour);
+        accountService.addGameToAccount(eldenRing, accountTwo);
     }
 
 }
