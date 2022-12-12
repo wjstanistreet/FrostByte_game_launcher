@@ -69,6 +69,11 @@ public class DataLoader implements ApplicationRunner {
         accountService.addGameToAccount(godOfWar, accountOne);
         accountService.addGameToAccount(godOfWar, accountFour);
         accountService.addGameToAccount(eldenRing, accountTwo);
+
+        accountRepository.save(accountOne);
+        accountRepository.save(accountFour);
+        accountRepository.save(accountTwo);
+
     }
 
 }
