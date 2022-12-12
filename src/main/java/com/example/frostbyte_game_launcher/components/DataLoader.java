@@ -1,5 +1,6 @@
 package com.example.frostbyte_game_launcher.components;
 
+import com.example.frostbyte_game_launcher.models.Account;
 import com.example.frostbyte_game_launcher.repositories.AccountRepository;
 import com.example.frostbyte_game_launcher.repositories.GameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,10 @@ public class DataLoader implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        //
+
+        //Account Creation
+        Account accountOne = new Account("Will Stanistreet", "12345", "01/01/1942", "will@will.com" );
+        accountRepository.save(accountOne);
 
     }
 
