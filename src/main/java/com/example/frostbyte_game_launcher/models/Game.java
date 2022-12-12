@@ -1,5 +1,7 @@
 package com.example.frostbyte_game_launcher.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +29,8 @@ public class Game {
     @Column(name = "age_rating")
     private String ageRating;
 
-    @Column(name = "players")
+    @ManyToMany(mappedBy = "installGames")
+    @JsonIgnoreProperties({"installGames"})
     private List<Account> players;
 
     public Game(){};
