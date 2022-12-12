@@ -1,6 +1,7 @@
 package com.example.frostbyte_game_launcher.components;
 
 import com.example.frostbyte_game_launcher.models.Account;
+import com.example.frostbyte_game_launcher.models.Game;
 import com.example.frostbyte_game_launcher.repositories.AccountRepository;
 import com.example.frostbyte_game_launcher.repositories.GameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,34 @@ public class DataLoader implements ApplicationRunner {
         accountRepository.save(accountThree);
         Account accountFour = new Account("Fatimah Patel", "11111", "03/03/1993", "fatimah@fatimah.com");
         accountRepository.save(accountFour);
+
+
+        //Games Creation
+
+        Game godOfWar = new Game("God Of War", "Corey Barlog", 30,
+                "Fantasy", "18");
+        gameRepository.save(godOfWar);
+
+        Game persona5 = new Game("Persona 5", "Katsura Hashino", 20,
+                "JRPG", "16");
+        gameRepository.save(persona5);
+
+        Game devilMayCry = new Game("Devil May Cry", "Hideaki Itsuno", 50,
+                "Action", "18");
+        gameRepository.save(devilMayCry);
+
+        Game eldenRing = new Game("Elden ring", "Hidetaka Miyazaki",
+                70,"Action", "18");
+        gameRepository.save(eldenRing);
+
+        Game forzaHorizon = new Game("Forza Horizon", "Bill Gates",
+                68.99,"Racing", "3");
+        gameRepository.save(forzaHorizon);
+
+        Game marioKart = new Game("Mario Kart", "Shigeru Miyamoto",
+                50,"Racing", "3");
+        gameRepository.save(marioKart);
+
 
     }
 
