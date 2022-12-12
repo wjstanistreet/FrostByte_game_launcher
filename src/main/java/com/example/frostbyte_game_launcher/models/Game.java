@@ -1,16 +1,33 @@
 package com.example.frostbyte_game_launcher.models;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@Table (name = "games")
 public class Game {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @Column(name = "name")
     private String name;
+
+    @Column(name = "publisher")
     private String publisher;
+
+    @Column(name = "price")
     private double price;
+
+    @Column(name = "genre")
     private String genre;
+
+    @Column(name = "age_rating")
     private String ageRating;
+
+    @Column(name = "players")
     private List<Account> players;
 
     public Game(){};
