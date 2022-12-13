@@ -2,6 +2,7 @@ package com.example.frostbyte_game_launcher.controllers;
 
 import com.example.frostbyte_game_launcher.models.Account;
 import com.example.frostbyte_game_launcher.models.Game;
+import com.example.frostbyte_game_launcher.models.InstallGameDTO;
 import com.example.frostbyte_game_launcher.repositories.AccountRepository;
 import com.example.frostbyte_game_launcher.services.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,14 +47,19 @@ public class AccountController {
         return new ResponseEntity<>(accountToUpdate, HttpStatus.OK);
     }
 
-
-
     //Delete account
-
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Long> deleteAccount(@PathVariable Long id){
         accountRepository.deleteById(id);
         return new ResponseEntity<>(id,HttpStatus.NO_CONTENT);
 
+    }
+
+    //Adding game to account
+    @PatchMapping(value = "/{id}")
+    public ResponseEntity<Account> addGameToAccount(@PathVariable Long accountId, @RequestBody InstallGameDTO installGameDTO){
+        Long gameId = installGameDTO.getGameId();
+        Account updatedAccount = accountService.addGameToAccount(accountId, gameId);
+        return new ResponseEntity<>(updatedAccount, HttpStatus.OK);
     }
 }

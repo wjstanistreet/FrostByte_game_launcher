@@ -31,4 +31,15 @@ public class AccountService {
         return accountRepository.findById(id);
     }
 
+    public Account addGameToAccount(Long accountId, Long gameId){
+        Account account = accountRepository.findById(accountId).get();
+        Game game = gameRepository.findById(gameId).get();
+        List<Game> gameList = account.getInstallGames();
+        //if game is already in the account ^^^^^
+        gameList.add(game);
+        account.setInstallGames(gameList);
+        accountRepository.save(account);
+        return account;
+    }
+
 }
