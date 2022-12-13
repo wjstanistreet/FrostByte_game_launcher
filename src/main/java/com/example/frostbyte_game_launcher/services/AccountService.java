@@ -31,7 +31,7 @@ public class AccountService {
         return accountRepository.findById(id);
     }
 
-    public Account addGameToAccount(Long accountId, Long gameId){
+    public Account addGameToAccount(long accountId, long gameId){
         Account account = accountRepository.findById(accountId).get();
         Game game = gameRepository.findById(gameId).get();
         List<Game> gameList = account.getInstallGames();

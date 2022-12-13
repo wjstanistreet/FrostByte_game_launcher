@@ -56,10 +56,10 @@ public class AccountController {
     }
 
     //Adding game to account
-    @PatchMapping(value = "/{id}")
-    public ResponseEntity<Account> addGameToAccount(@PathVariable Long accountId, @RequestBody InstallGameDTO installGameDTO){
-        Long gameId = installGameDTO.getGameId();
-        Account updatedAccount = accountService.addGameToAccount(accountId, gameId);
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<Account> addGameToAccount(@RequestBody InstallGameDTO installGameDTO, @PathVariable long id){
+        long gameId = installGameDTO.getGameId();
+        Account updatedAccount = accountService.addGameToAccount(id, gameId);
         return new ResponseEntity<>(updatedAccount, HttpStatus.OK);
     }
 }
