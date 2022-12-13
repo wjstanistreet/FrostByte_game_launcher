@@ -17,10 +17,13 @@ public class GameService {
 
     public List<Game> getAllGames(){
         return gameRepository.findAll();
+
     }
 
     public Optional<Game> getGameById(Long id){
         return gameRepository.findById(id);
     }
 
-}
+    }
+
+

@@ -4,7 +4,9 @@ import com.example.frostbyte_game_launcher.models.Account;
 import com.example.frostbyte_game_launcher.models.Game;
 import com.example.frostbyte_game_launcher.models.InstallGameDTO;
 import com.example.frostbyte_game_launcher.repositories.AccountRepository;
+import com.example.frostbyte_game_launcher.repositories.GameRepository;
 import com.example.frostbyte_game_launcher.services.AccountService;
+import com.example.frostbyte_game_launcher.services.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +24,11 @@ public class AccountController {
     AccountService accountService;
     @Autowired
     private AccountRepository accountRepository;
+
+    @Autowired
+    GameService gameService;
+    @Autowired
+    private GameRepository gameRepository;
 
     //Getting all the accounts
     @GetMapping
@@ -70,10 +77,11 @@ public class AccountController {
     @DeleteMapping(value = "/{accountId}/{gameId}")
     public ResponseEntity<Account> deleteGameFromAccount(@PathVariable Long accountId, @PathVariable Long gameId){
         Account accountToUpdate = accountService.getAccountById(accountId).get();
+        Game game = gameService.getGameById(gameId).get();
         List<Game> gameToDelete = accountToUpdate.getInstallGames();
-        gameToDelete.remove(gameId);
+        gameToDelete.remove(game);
         accountToUpdate.setInstallGames(gameToDelete);
         accountRepository.save(accountToUpdate);
-        return new ResponseEntity<>(accountToUpdate, HttpStatus.OK);
+        return new ResponseEntity<>(accountToUpdate, HttpStatus.NOT_FOUND);
     }
 }
