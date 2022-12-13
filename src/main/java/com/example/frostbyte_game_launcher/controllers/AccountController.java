@@ -1,6 +1,7 @@
 package com.example.frostbyte_game_launcher.controllers;
 
 import com.example.frostbyte_game_launcher.models.Account;
+import com.example.frostbyte_game_launcher.models.Game;
 import com.example.frostbyte_game_launcher.repositories.AccountRepository;
 import com.example.frostbyte_game_launcher.services.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/accounts")
@@ -29,5 +31,17 @@ public class AccountController {
     public ResponseEntity<Account> addNewAccount(@RequestBody Account account){
         accountRepository.save(account);
         return new ResponseEntity<>(account, HttpStatus.CREATED);
+    }
+
+    @PatchMapping(value = "/{id}")
+    public ResponseEntity<Account>updateAccountInformation(@RequestBody Account account, @PathVariable Long id){
+        Account accountToUpdate = accountService.getAccountById(id).get();
+        accountToUpdate.setName(account.getName());
+        accountToUpdate.setPassword(account.getPassword());
+        accountToUpdate.setDateOfBirth(account.getDateOfBirth());
+        accountToUpdate.setEmail(account.getEmail());
+
+        accountRepository.save(accountToUpdate);
+        return new ResponseEntity<>(accountToUpdate, HttpStatus.OK);
     }
 }
