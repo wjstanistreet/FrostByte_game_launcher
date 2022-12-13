@@ -31,6 +31,7 @@ public class GameController {
          if(genre != null){
              return new ResponseEntity<>(gameRepository.findByGenre(genre),HttpStatus.OK);
          }else {
+             // TODO: Ignore list of players when showing All Games
              return new ResponseEntity<>(allGames, HttpStatus.OK);
          }
     }
@@ -46,6 +47,5 @@ public class GameController {
         }
 
     }
-
 
 }
