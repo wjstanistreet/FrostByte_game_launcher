@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.StoredProcedureParameter;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,5 +44,16 @@ public class AccountController {
 
         accountRepository.save(accountToUpdate);
         return new ResponseEntity<>(accountToUpdate, HttpStatus.OK);
+    }
+
+
+
+    //Delete account
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Long> deleteAccount(@PathVariable Long id){
+        accountRepository.deleteById(id);
+        return new ResponseEntity<>(id,HttpStatus.NO_CONTENT);
+
     }
 }
