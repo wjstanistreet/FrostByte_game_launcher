@@ -23,18 +23,21 @@ public class AccountController {
     @Autowired
     private AccountRepository accountRepository;
 
+    //Getting all the accounts
     @GetMapping
     public ResponseEntity<List<Account>> getAllAccounts(){
         List<Account> allAccounts = accountService.getAllAccounts();
         return new ResponseEntity<>(allAccounts, HttpStatus.OK);
     }
 
+    //Adding a new account
     @PostMapping
     public ResponseEntity<Account> addNewAccount(@RequestBody Account account){
         accountRepository.save(account);
         return new ResponseEntity<>(account, HttpStatus.CREATED);
     }
 
+    //Update account information
     @PatchMapping(value = "/{id}")
     public ResponseEntity<Account>updateAccountInformation(@RequestBody Account account, @PathVariable Long id){
         Account accountToUpdate = accountService.getAccountById(id).get();
@@ -62,4 +65,6 @@ public class AccountController {
         Account updatedAccount = accountService.addGameToAccount(id, gameId);
         return new ResponseEntity<>(updatedAccount, HttpStatus.OK);
     }
+
+
 }
