@@ -66,7 +66,7 @@ public class AccountController {
         return new ResponseEntity<>(updatedAccount, HttpStatus.OK);
     }
 
-    //Delete Game from Account
+    //Delete Game from Account - editing required
     @DeleteMapping(value = "/{accountId}/{gameId}")
     public ResponseEntity<Account> deleteGameFromAccount(@PathVariable Long accountId, @PathVariable Long gameId){
         Account accountToUpdate = accountService.getAccountById(accountId).get();
@@ -76,6 +76,4 @@ public class AccountController {
         accountRepository.save(accountToUpdate);
         return new ResponseEntity<>(accountToUpdate, HttpStatus.OK);
     }
-
-
 }
