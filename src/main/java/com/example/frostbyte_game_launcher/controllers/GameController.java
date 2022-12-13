@@ -23,12 +23,14 @@ public class GameController {
     @Autowired
     GameService gameService;
 
+    //Getting all games
     @GetMapping
     public ResponseEntity<List<Game>> getAllGames(){
         List<Game> allGames = gameService.getAllGames();
         return new ResponseEntity<>(allGames, HttpStatus.OK);
     }
 
+    //Get games by ID
     @GetMapping(value = "/{id}")
     public ResponseEntity <Game> getGameById(@PathVariable Long id){
         Optional<Game> game = gameService.getGameById(id);
