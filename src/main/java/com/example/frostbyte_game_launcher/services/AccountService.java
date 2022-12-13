@@ -7,6 +7,8 @@ import com.example.frostbyte_game_launcher.repositories.GameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class AccountService {
 
@@ -18,6 +20,10 @@ public class AccountService {
 
     public void addGameToAccount(Game game, Account account){
         account.getInstallGames().add(game);
+    }
+
+    public List<Account> getAllAccounts(){
+        return accountRepository.findAll();
     }
 
 }

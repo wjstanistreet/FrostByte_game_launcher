@@ -30,8 +30,7 @@ public class Account {
     @JoinTable (name = "accounts_games",
     joinColumns = @JoinColumn(name = "account_id"),
     inverseJoinColumns = @JoinColumn(name = "game_id"))
-
-    @JsonIgnoreProperties({"accounts"})
+    @JsonIgnoreProperties({"players"})
     private List<Game> installGames;
 
     public Account (){};
