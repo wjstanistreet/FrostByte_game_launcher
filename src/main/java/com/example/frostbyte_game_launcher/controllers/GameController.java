@@ -38,19 +38,6 @@ public class GameController {
          }
     }
 
-    //§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§
-//    @GetMapping
-//    public ResponseEntity<List<Game>> getGamesByAge(@RequestParam(required = false,name = "ageRating")String ageRating) {
-//        List<Game> allGames = gameService.getAllGames();
-//        if (ageRating != null) {
-//            return new ResponseEntity<>(gameRepository.findByAgeRating(ageRating), HttpStatus.OK);
-//        } else {
-//            // TODO: Ignore list of players when showing All Games
-//            return new ResponseEntity<>(allGames, HttpStatus.OK);
-//        }
-//    }
-        //§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§
-
     //Get games by ID
     @GetMapping(value = "/{id}")
     public ResponseEntity <Game> getGameById(@PathVariable Long id){
