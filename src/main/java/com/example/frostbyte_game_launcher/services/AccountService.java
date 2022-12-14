@@ -7,6 +7,9 @@ import com.example.frostbyte_game_launcher.repositories.GameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
 public class AccountService {
 
@@ -18,6 +21,25 @@ public class AccountService {
 
     public void addGameToAccount(Game game, Account account){
         account.getInstallGames().add(game);
+    }
+
+    public List<Account> getAllAccounts(){
+        return accountRepository.findAll();
+    }
+
+    public Optional<Account> getAccountById(Long id){
+        return accountRepository.findById(id);
+    }
+
+    public Account addGameToAccount(long accountId, long gameId){
+        Account account = accountRepository.findById(accountId).get();
+        Game game = gameRepository.findById(gameId).get();
+        List<Game> gameList = account.getInstallGames();
+        //if game is already in the account ^^^^^
+        gameList.add(game);
+        account.setInstallGames(gameList);
+        accountRepository.save(account);
+        return account;
     }
 
 }
