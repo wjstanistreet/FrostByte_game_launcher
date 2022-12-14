@@ -3,6 +3,7 @@ package com.example.frostbyte_game_launcher.controllers;
 import com.example.frostbyte_game_launcher.models.Account;
 import com.example.frostbyte_game_launcher.models.Game;
 import com.example.frostbyte_game_launcher.models.InstallGameDTO;
+import com.example.frostbyte_game_launcher.models.Reply;
 import com.example.frostbyte_game_launcher.repositories.AccountRepository;
 import com.example.frostbyte_game_launcher.repositories.GameRepository;
 import com.example.frostbyte_game_launcher.services.AccountService;
@@ -69,12 +70,16 @@ public class AccountController {
     @PutMapping(value = "/{id}")
     public ResponseEntity<Account> addGameToAccount(@RequestBody InstallGameDTO installGameDTO, @PathVariable long id){
         long gameId = installGameDTO.getGameId();
+        Account account = accountRepository.findById(id).get();
+        Reply reply = new Reply();
         if (accountService.checkEnoughMoney(id, gameId)){
             Account updatedAccount = accountService.addGameToAccount(id, gameId);
             updatedAccount = accountService.updateBalance(id, gameId);
+            reply.setMessage("Purchase successful");
+            reply.setAccountStatus(updatedAccount);
             return new ResponseEntity<>(updatedAccount, HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(null, HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>(account, HttpStatus.FORBIDDEN);
         }
     }
 
