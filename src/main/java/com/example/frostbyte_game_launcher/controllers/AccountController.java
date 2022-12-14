@@ -69,8 +69,13 @@ public class AccountController {
     @PutMapping(value = "/{id}")
     public ResponseEntity<Account> addGameToAccount(@RequestBody InstallGameDTO installGameDTO, @PathVariable long id){
         long gameId = installGameDTO.getGameId();
-        Account updatedAccount = accountService.addGameToAccount(id, gameId);
-        return new ResponseEntity<>(updatedAccount, HttpStatus.OK);
+        if (accountService.checkEnoughMoney(id, gameId)){
+            Account updatedAccount = accountService.addGameToAccount(id, gameId);
+            updatedAccount = accountService.updateBalance(id, gameId);
+            return new ResponseEntity<>(updatedAccount, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(null, HttpStatus.FORBIDDEN);
+        }
     }
 
     //Delete Game from Account - editing required

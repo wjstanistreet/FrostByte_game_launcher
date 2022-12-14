@@ -42,4 +42,19 @@ public class AccountService {
         return account;
     }
 
+    public boolean checkEnoughMoney(long accountId, long gameId){
+        double accountWallet = accountRepository.findById(accountId).get().getWallet();
+        double gamePrice = gameRepository.findById(gameId).get().getPrice();
+        return (accountWallet >= gamePrice);
+    }
+
+    public Account updateBalance(long accountId, long gameId){
+        Account account = accountRepository.findById(accountId).get();
+        double gamePrice = gameRepository.findById(gameId).get().getPrice();
+        double currentWallet = account.getWallet();
+        account.setWallet(currentWallet - gamePrice);
+        accountRepository.save(account);
+        return account;
+    }
+
 }

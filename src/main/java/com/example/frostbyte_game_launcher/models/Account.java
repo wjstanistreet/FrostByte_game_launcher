@@ -26,6 +26,9 @@ public class Account {
     @Column(name = "email")
     private String email;
 
+    @Column
+    private double wallet;
+
     @ManyToMany
     @JoinTable (name = "accounts_games",
     joinColumns = @JoinColumn(name = "account_id"),
@@ -41,6 +44,7 @@ public class Account {
         this.dateOfBirth = dateOfBirth;
         this.email = email;
         this.installGames = new ArrayList<>();
+        this.wallet = 0;
     }
 
     public long getId() {
@@ -89,5 +93,13 @@ public class Account {
 
     public void setInstallGames(List<Game> installGames) {
         this.installGames = installGames;
+    }
+
+    public double getWallet() {
+        return wallet;
+    }
+
+    public void setWallet(double wallet) {
+        this.wallet = wallet;
     }
 }
