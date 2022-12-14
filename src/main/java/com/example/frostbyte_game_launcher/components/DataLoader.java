@@ -37,20 +37,20 @@ public class DataLoader implements ApplicationRunner {
         //RTS
         // Open World
 
-        Game godOfWar = new Game("God Of War", "Corey Barlog", 30,
+        Game godOfWar = new Game("God Of War", "Corey Barlog", 30.0,
                 "Fantasy", "18");
         gameRepository.save(godOfWar);
 
-        Game persona5 = new Game("Persona 5", "Katsura Hashino", 20,
+        Game persona5 = new Game("Persona 5", "Katsura Hashino", 20.0,
                 "JRPG", "16");
         gameRepository.save(persona5);
 
-        Game devilMayCry = new Game("Devil May Cry", "Hideaki Itsuno", 50,
+        Game devilMayCry = new Game("Devil May Cry", "Hideaki Itsuno", 50.0,
                 "Action", "18");
         gameRepository.save(devilMayCry);
 
         Game eldenRing = new Game("Elden ring", "Hidetaka Miyazaki",
-                70,"Action", "18");
+                70.0,"Action", "18");
         gameRepository.save(eldenRing);
 
         Game forzaHorizon = new Game("Forza Horizon", "Bill Gates",
@@ -58,46 +58,46 @@ public class DataLoader implements ApplicationRunner {
         gameRepository.save(forzaHorizon);
 
         Game marioKart = new Game("Mario Kart", "Shigeru Miyamoto",
-                50,"Racing", "3");
+                50.0,"Racing", "3");
         gameRepository.save(marioKart);
 
         Game horizonZeroDawn = new Game("Horizon Zero Dawn", "Mathijs de Jonge", 79.99,
                 "Fantasy", "16");
         gameRepository.save(horizonZeroDawn);
 
-        Game persona3 = new Game("Persona 3", "Katsura Hashino", 20,
+        Game persona3 = new Game("Persona 3", "Katsura Hashino", 20.0,
                 "JRPG", "16");
         gameRepository.save(persona3);
 
-        Game persona = new Game("Persona", "Hideaki Itsuno", 5,
+        Game persona = new Game("Persona", "Hideaki Itsuno", 5.0,
                 "JRPG", "15");
         gameRepository.save(persona);
 
         Game darkSouls = new Game("dark Souls", "Hidetaka Miyazaki",
-                15,"Action", "18");
+                15.0,"Action", "18");
         gameRepository.save(darkSouls);
 
         Game darkSouls2 = new Game("dark Souls2", "Hidetaka Miyazaki",
-                20,"Action", "18");
+                20.0,"Action", "18");
         gameRepository.save(darkSouls2);
 
         Game darkSouls3 = new Game("dark Souls 3", "Hidetaka Miyazaki",
-                15,"Action", "18");
+                15.0,"Action", "18");
         gameRepository.save(darkSouls3);
 
         Game bloodBourne = new Game("BloodBourne", "Hidetaka Miyazaki",
-                70,"Action", "18");
+                70.0,"Action", "18");
         gameRepository.save(bloodBourne);
 
         Game f1 = new Game("F1 Championships", "Lewis Hamilton",
-                1,"Racing", "3");
+                1.0,"Racing", "3");
         gameRepository.save(f1);
 
         Game midnightClub = new Game("Midnight club", "Jeff Pidasdny",
                 29.94,"Racing", "3");
         gameRepository.save(midnightClub);
 
-        Game godOfWarRagnorok = new Game("God Of War Ragnorok", "Corey Barlog", 70,
+        Game godOfWarRagnorok = new Game("God Of War Ragnorok", "Corey Barlog", 70.0,
                 "Fantasy", "18");
         gameRepository.save(godOfWarRagnorok);
 
@@ -114,7 +114,7 @@ public class DataLoader implements ApplicationRunner {
         gameRepository.save(gtaV);
 
         Game gtaViceCity = new Game("Grand Theft Auto Vice City", "Leslie Benzies",
-                10,"Open World", "18");
+                10.0,"Open World", "18");
         gameRepository.save(gtaViceCity);
 
         Game spidermanPS4 = new Game("SpiderMan ps4", "Bryan Intihar",
@@ -125,11 +125,11 @@ public class DataLoader implements ApplicationRunner {
                 "Open World", "16");
         gameRepository.save(dragonQuest14);
 
-        Game smtV = new Game("Shin Megami Tensai", "Kazuma Kaneko", 20,
+        Game smtV = new Game("Shin Megami Tensai", "Kazuma Kaneko", 20.0,
                 "JRPG", "16");
         gameRepository.save(smtV);
 
-        Game fifa15 = new Game("Fifa 15", "Penaldo", 5,
+        Game fifa15 = new Game("Fifa 15", "Penaldo", 5.0,
                 "Sport", "3");
         gameRepository.save(fifa15);
 
@@ -146,11 +146,11 @@ public class DataLoader implements ApplicationRunner {
         gameRepository.save(darkSouls3);
 
         Game streetFighter5 = new Game("Street Fighter 5", "Takayuki Nakayama",
-                20,"Fighting", "12");
+                20.0,"Fighting", "12");
         gameRepository.save(streetFighter5);
 
         Game tekken = new Game("Tekken", "Katsuhiro Harada",
-                5,"Fighting", "16");
+                5.0,"Fighting", "16");
         gameRepository.save(tekken);
 
         Game mortalKombat = new Game("Mortal Kombat", "Ed Boon",

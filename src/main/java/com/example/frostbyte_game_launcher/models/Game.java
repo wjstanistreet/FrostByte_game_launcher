@@ -21,7 +21,7 @@ public class Game {
     private String publisher;
 
     @Column(name = "price")
-    private double price;
+    private Double price;
 
     @Column(name = "genre")
     private String genre;
@@ -35,7 +35,7 @@ public class Game {
 
     public Game(){};
 
-    public Game(String name, String publisher, double price, String genre, String ageRating){
+    public Game(String name, String publisher, Double price, String genre, String ageRating){
         this.name = name;
         this.publisher = publisher;
         this.price = price;
@@ -68,11 +68,11 @@ public class Game {
         this.publisher = publisher;
     }
 
-    public double getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
