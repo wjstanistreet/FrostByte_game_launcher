@@ -7,6 +7,9 @@ import com.example.frostbyte_game_launcher.repositories.GameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
@@ -64,6 +67,16 @@ public class AccountService {
         List<Game> accountGames = account.getInstallGames();
         Game game = gameRepository.findById(gameId).get();
         return (accountGames.contains(game));
+    }
+
+    public boolean ageCheck(long accountId, long GameId){
+        Account account = accountRepository.findById(accountId).get();
+        String DOB = account.getDateOfBirth();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
+        //convert String to LocalDate
+        LocalDate localDOB = LocalDate.parse(DOB, formatter);
+        LocalDate currentDate = LocalDate.now();
+        Period.between(localDOB, currentDate).getYears();
     }
 
 }
