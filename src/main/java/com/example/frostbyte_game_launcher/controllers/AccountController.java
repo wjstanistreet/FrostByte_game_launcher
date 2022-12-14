@@ -3,6 +3,7 @@ package com.example.frostbyte_game_launcher.controllers;
 import com.example.frostbyte_game_launcher.models.Account;
 import com.example.frostbyte_game_launcher.models.Game;
 import com.example.frostbyte_game_launcher.models.InstallGameDTO;
+import com.example.frostbyte_game_launcher.models.Reply;
 import com.example.frostbyte_game_launcher.repositories.AccountRepository;
 import com.example.frostbyte_game_launcher.repositories.GameRepository;
 import com.example.frostbyte_game_launcher.services.AccountService;
@@ -37,6 +38,16 @@ public class AccountController {
         return new ResponseEntity<>(allAccounts, HttpStatus.OK);
     }
 
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<Account> getAccountByID(@PathVariable long id){
+        Optional<Account> account1 = accountService.getAccountById(id);
+        if (account1.isPresent()){
+            return new ResponseEntity<>(account1.get(), HttpStatus.OK);
+        } else{
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+    }
+
     //Adding a new account
     @PostMapping
     public ResponseEntity<Account> addNewAccount(@RequestBody Account account){
@@ -67,10 +78,26 @@ public class AccountController {
 
     //Adding game to account
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Account> addGameToAccount(@RequestBody InstallGameDTO installGameDTO, @PathVariable long id){
+    public ResponseEntity<Reply> addGameToAccount(@RequestBody InstallGameDTO installGameDTO, @PathVariable long id){
         long gameId = installGameDTO.getGameId();
-        Account updatedAccount = accountService.addGameToAccount(id, gameId);
-        return new ResponseEntity<>(updatedAccount, HttpStatus.OK);
+        Account account = accountRepository.findById(id).get();
+        if(!accountService.ageCheck(id, gameId)){
+            Reply reply = new Reply("You're not permitted to buy the game at this time.", account);
+            return new ResponseEntity<>(reply, HttpStatus.FORBIDDEN);
+        }
+        if (accountService.checkGameInAccount(id, gameId)){
+            Reply reply = new Reply("Game already in account", account);
+            return new ResponseEntity<>(reply, HttpStatus.FORBIDDEN);
+        }
+        if (accountService.checkEnoughMoney(id, gameId)){
+            Account updatedAccount = accountService.addGameToAccount(id, gameId);
+            updatedAccount = accountService.updateBalance(id, gameId);
+            Reply reply = new Reply("Purchase successful: Enjoy the game!", updatedAccount);
+            return new ResponseEntity<>(reply, HttpStatus.OK);
+        } else {
+            Reply reply = new Reply("Transaction failed: Insufficient funds", account);
+            return new ResponseEntity<>(reply, HttpStatus.FORBIDDEN);
+        }
     }
 
     //Delete Game from Account - editing required
