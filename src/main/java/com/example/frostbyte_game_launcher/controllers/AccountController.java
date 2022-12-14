@@ -68,7 +68,7 @@ public class AccountController {
 
     //Adding game to account
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Account> addGameToAccount(@RequestBody InstallGameDTO installGameDTO, @PathVariable long id){
+    public ResponseEntity<Reply> addGameToAccount(@RequestBody InstallGameDTO installGameDTO, @PathVariable long id){
         long gameId = installGameDTO.getGameId();
         Account account = accountRepository.findById(id).get();
         Reply reply = new Reply();
@@ -77,9 +77,11 @@ public class AccountController {
             updatedAccount = accountService.updateBalance(id, gameId);
             reply.setMessage("Purchase successful");
             reply.setAccountStatus(updatedAccount);
-            return new ResponseEntity<>(updatedAccount, HttpStatus.OK);
+            return new ResponseEntity<>(reply, HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(account, HttpStatus.FORBIDDEN);
+            reply.setMessage("Transaction failed");
+            reply.setAccountStatus(account);
+            return new ResponseEntity<>(reply, HttpStatus.FORBIDDEN);
         }
     }
 
