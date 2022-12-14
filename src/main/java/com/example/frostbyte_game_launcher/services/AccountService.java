@@ -45,12 +45,14 @@ public class AccountService {
         return account;
     }
 
+    //if the wallet in account have enough money, then return true;
     public boolean checkEnoughMoney(long accountId, long gameId){
         double accountWallet = accountRepository.findById(accountId).get().getWallet();
         double gamePrice = gameRepository.findById(gameId).get().getPrice();
         return (accountWallet >= gamePrice);
     }
 
+    //if the purchase is successful, then update the wallet balance;
     public Account updateBalance(long accountId, long gameId){
         Account account = accountRepository.findById(accountId).get();
         double gamePrice = gameRepository.findById(gameId).get().getPrice();
@@ -62,6 +64,7 @@ public class AccountService {
         return account;
     }
 
+    //if game already in account, then return true;
     public boolean checkGameInAccount(long accountId, long gameId){
         Account account = accountRepository.findById(accountId).get();
         List<Game> accountGames = account.getInstallGames();
@@ -69,6 +72,7 @@ public class AccountService {
         return (accountGames.contains(game));
     }
 
+    //if age reaches the game age rating restriction, then return true;
     public boolean ageCheck(long accountId, long gameId){
         Account account = accountRepository.findById(accountId).get();
         int age = account.getYearByDOB();

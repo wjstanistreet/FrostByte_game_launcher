@@ -106,9 +106,9 @@ public class Account {
         this.wallet = wallet;
     }
 
+    //convert String dateOfBirth to LocalDate DOB and return age in years;
     public int getYearByDOB(){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
-        //convert String to LocalDate
         LocalDate localDOB = LocalDate.parse(this.dateOfBirth, formatter);
         LocalDate currentDate = LocalDate.now();
         return Period.between(localDOB, currentDate).getYears();
