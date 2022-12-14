@@ -3,6 +3,9 @@ package com.example.frostbyte_game_launcher.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -101,5 +104,14 @@ public class Account {
 
     public void setWallet(double wallet) {
         this.wallet = wallet;
+    }
+
+    public int getYearByDOB(){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
+        //convert String to LocalDate
+        LocalDate localDOB = LocalDate.parse(this.dateOfBirth, formatter);
+        LocalDate currentDate = LocalDate.now();
+        return Period.between(localDOB, currentDate).getYears();
+
     }
 }

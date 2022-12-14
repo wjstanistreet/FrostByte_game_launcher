@@ -69,14 +69,12 @@ public class AccountService {
         return (accountGames.contains(game));
     }
 
-    public boolean ageCheck(long accountId, long GameId){
+    public boolean ageCheck(long accountId, long gameId){
         Account account = accountRepository.findById(accountId).get();
-        String DOB = account.getDateOfBirth();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
-        //convert String to LocalDate
-        LocalDate localDOB = LocalDate.parse(DOB, formatter);
-        LocalDate currentDate = LocalDate.now();
-        Period.between(localDOB, currentDate).getYears();
+        int age = account.getYearByDOB();
+        Game game = gameRepository.findById(gameId).get();
+        int ratingAsInt = Integer.valueOf(game.getAgeRating());
+        return(age >= ratingAsInt);
     }
 
 }
