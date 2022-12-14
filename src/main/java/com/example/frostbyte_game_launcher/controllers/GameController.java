@@ -6,6 +6,7 @@ import com.example.frostbyte_game_launcher.repositories.GameRepository;
 import com.example.frostbyte_game_launcher.services.AccountService;
 import com.example.frostbyte_game_launcher.services.GameService;
 import org.apache.coyote.Response;
+import org.aspectj.weaver.ast.And;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +25,7 @@ public class GameController {
     @Autowired
     GameRepository gameRepository;
 
-    //Todo: Getting games with filters for genre, ageRating and price. DONE§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§
+    //Todo: Getting games with filters for genre, ageRating. Price still needs looked at. DONE§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§
     @GetMapping
     public ResponseEntity<List<Game>> getAllGames(@RequestParam(required = false,name = "genre")String genre,
                                                   @RequestParam(required = false,name = "ageRating")String ageRating,
