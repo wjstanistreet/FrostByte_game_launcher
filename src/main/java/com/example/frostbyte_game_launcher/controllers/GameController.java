@@ -47,8 +47,9 @@ public class GameController {
         if (price != null) {
             return new ResponseEntity<>(gameRepository.findByPrice(price), HttpStatus.OK);
         }
-
-        else {
+        if (price != null && genre != null) {
+            return new ResponseEntity<>(gameRepository.findByPriceAndGenre(price, genre), HttpStatus.OK);
+        } else {
             // TODO: Ignore list of players when showing All Games
             return new ResponseEntity<>(allGames, HttpStatus.OK);
         }
