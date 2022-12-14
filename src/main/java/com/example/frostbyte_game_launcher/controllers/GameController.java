@@ -38,7 +38,7 @@ public class GameController {
          //Pricing variable needs to be worked on
          if (price != null){return new ResponseEntity<>(gameRepository.findByPrice(price), HttpStatus.OK);}
 
-         if (name != null){return new ResponseEntity<>(gameRepository)
+         if (name != null){return new ResponseEntity<>(gameRepository.findByName(name), HttpStatus.OK);}
 
          else {
              // TODO: Ignore list of players when showing All Games
