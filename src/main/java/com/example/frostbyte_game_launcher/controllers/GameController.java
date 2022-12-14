@@ -28,13 +28,17 @@ public class GameController {
     @GetMapping
     public ResponseEntity<List<Game>> getAllGames(@RequestParam(required = false,name = "genre")String genre,
                                                   @RequestParam (required = false,name = "ageRating")String ageRating,
-                                                  @RequestParam(required = false, name = "price") Double price){
+                                                  @RequestParam(required = false, name = "price") Double price,
+                                                  @RequestParam(required = false, name = "name") String name){
         List<Game> allGames = gameService.getAllGames();
          if(genre != null){return new ResponseEntity<>(gameRepository.findByGenre(genre),HttpStatus.OK);}
 
          if (ageRating != null){return new ResponseEntity<>(gameRepository.findByAgeRating(ageRating),HttpStatus.OK);}
 
+         //Pricing variable needs to be worked on
          if (price != null){return new ResponseEntity<>(gameRepository.findByPrice(price), HttpStatus.OK);}
+
+         if (name != null){return new ResponseEntity<>(gameRepository)
 
          else {
              // TODO: Ignore list of players when showing All Games
