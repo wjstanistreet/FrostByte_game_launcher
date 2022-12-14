@@ -107,11 +107,10 @@ public class Account {
     }
 
     //convert String dateOfBirth to LocalDate DOB and return age in years;
-    public int getYearByDOB(){
+    public int yearByDOB(){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
         LocalDate localDOB = LocalDate.parse(this.dateOfBirth, formatter);
         LocalDate currentDate = LocalDate.now();
         return Period.between(localDOB, currentDate).getYears();
-
     }
 }

@@ -75,7 +75,7 @@ public class AccountService {
     //if age reaches the game age rating restriction, then return true;
     public boolean ageCheck(long accountId, long gameId){
         Account account = accountRepository.findById(accountId).get();
-        int age = account.getYearByDOB();
+        int age = account.yearByDOB();
         Game game = gameRepository.findById(gameId).get();
         int ratingAsInt = Integer.valueOf(game.getAgeRating());
         return(age >= ratingAsInt);

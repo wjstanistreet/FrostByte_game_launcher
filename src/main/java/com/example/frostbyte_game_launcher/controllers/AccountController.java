@@ -72,7 +72,10 @@ public class AccountController {
         long gameId = installGameDTO.getGameId();
         Account account = accountRepository.findById(id).get();
         if (accountService.checkEnoughMoney(id, gameId)){
-
+            if(!accountService.ageCheck(id, gameId)){
+                Reply reply = new Reply("You're not permitted to buy the game at this time.", account);
+                return new ResponseEntity<>(reply, HttpStatus.FORBIDDEN);
+            }
             if (accountService.checkGameInAccount(id, gameId)){
                 Reply reply = new Reply("Transaction failed: Game already in account", account);
                 return new ResponseEntity<>(reply, HttpStatus.FORBIDDEN);
