@@ -309,7 +309,7 @@ public class DataLoader implements ApplicationRunner {
                 "Stealth", "16");
         gameRepository.save(batmanArkhamKnight);
 
-        Game marioAndSonicLondonOlympics= new Game("Mario And Sonic London Olympics", "Eigo Kasahara ", 29.99,
+        Game marioAndSonicLondonOlympics= new Game("Mario And Sonic London Olympics", "Eigo Kasahara", 29.99,
                 "Sport", "16");
         gameRepository.save(marioAndSonicLondonOlympics);
 

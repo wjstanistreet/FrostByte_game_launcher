@@ -29,7 +29,8 @@ public class GameController {
     public ResponseEntity<List<Game>> getAllGames(@RequestParam(required = false,name = "genre")String genre,
                                                   @RequestParam (required = false,name = "ageRating")String ageRating,
                                                   @RequestParam(required = false, name = "price") Double price,
-                                                  @RequestParam(required = false, name = "name") String name){
+                                                  @RequestParam(required = false, name = "name") String name,
+                                                  @RequestParam(required = false, name = "publisher") String publisher){
         List<Game> allGames = gameService.getAllGames();
          if(genre != null){return new ResponseEntity<>(gameRepository.findByGenre(genre),HttpStatus.OK);}
 
@@ -39,6 +40,8 @@ public class GameController {
          if (price != null){return new ResponseEntity<>(gameRepository.findByPrice(price), HttpStatus.OK);}
 
          if (name != null){return new ResponseEntity<>(gameRepository.findByName(name), HttpStatus.OK);}
+
+        if (publisher != null){return new ResponseEntity<>(gameRepository.findByPublisher(publisher), HttpStatus.OK);}
 
          else {
              // TODO: Ignore list of players when showing All Games
