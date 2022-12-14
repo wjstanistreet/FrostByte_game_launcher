@@ -27,27 +27,28 @@ public class GameController {
     //Getting all games
     @GetMapping
     public ResponseEntity<List<Game>> getAllGames(@RequestParam(required = false,name = "genre")String genre,
-                                                  @RequestParam(required = false,name = "age")String ageRating{
+                                                  @RequestParam (required = false,name = "ageRating")String ageRating){
         List<Game> allGames = gameService.getAllGames();
          if(genre != null){
-             return new ResponseEntity<>(gameRepository.findByGenre(genre),HttpStatus.OK || gameRepository.findByAgeRating(ageRating),HttpStatus.OK);
-         }else {
+             return new ResponseEntity<>(gameRepository.findByGenre(genre),HttpStatus.OK);
+         } if (ageRating != null){return new ResponseEntity<>(gameRepository.findByAgeRating(ageRating),HttpStatus.OK);}
+         else {
              // TODO: Ignore list of players when showing All Games
              return new ResponseEntity<>(allGames, HttpStatus.OK);
          }
     }
 
     //§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§
-    @GetMapping
-    public ResponseEntity<List<Game>> getGamesByAge(@RequestParam(required = false,name = "age")String ageRating) {
-        List<Game> allGames = gameService.getAllGames();
-        if (ageRating != null) {
-            return new ResponseEntity<>(gameRepository.findByGenre(ageRating), HttpStatus.OK);
-        } else {
-            // TODO: Ignore list of players when showing All Games
-            return new ResponseEntity<>(allGames, HttpStatus.OK);
-        }
-    }
+//    @GetMapping
+//    public ResponseEntity<List<Game>> getGamesByAge(@RequestParam(required = false,name = "ageRating")String ageRating) {
+//        List<Game> allGames = gameService.getAllGames();
+//        if (ageRating != null) {
+//            return new ResponseEntity<>(gameRepository.findByAgeRating(ageRating), HttpStatus.OK);
+//        } else {
+//            // TODO: Ignore list of players when showing All Games
+//            return new ResponseEntity<>(allGames, HttpStatus.OK);
+//        }
+//    }
         //§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§
 
     //Get games by ID
