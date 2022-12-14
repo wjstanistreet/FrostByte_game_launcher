@@ -33,9 +33,11 @@ public class GameController {
                                                   @RequestParam(required = false, name = "name") String name,
                                                   @RequestParam(required = false, name = "publisher") String publisher){
         List<Game> allGames = gameService.getAllGames();
-         if(genre != null){return new ResponseEntity<>(gameRepository.findByGenre(genre),HttpStatus.OK);}
+//         if(genre != null){return new ResponseEntity<>(gameRepository.findByGenre(genre),HttpStatus.OK);}
 
-         if (ageRating != null){return new ResponseEntity<>(gameRepository.findByAgeRating(ageRating),HttpStatus.OK);}
+         if (ageRating != null && genre != null){
+             return new ResponseEntity<>(gameRepository.findByGenreAndAgeRating(genre, ageRating), HttpStatus.OK);}
+//             return new ResponseEntity<>(gameRepository.findByAgeRating(ageRating),HttpStatus.OK);}
 
          //Pricing variable needs to be worked on
          if (price != null){return new ResponseEntity<>(gameRepository.findByPrice(price), HttpStatus.OK);}
