@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.xml.namespace.QName;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,32 +26,35 @@ public class GameController {
     @Autowired
     GameRepository gameRepository;
 
+
+
     //Todo: Getting games with filters for genre, ageRating. Price still needs looked at. DONE§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§
     @GetMapping
-    public ResponseEntity<List<Game>> getAllGames(@RequestParam(required = false,name = "genre")String genre,
-                                                  @RequestParam(required = false,name = "ageRating")String ageRating,
+    public ResponseEntity<List<Game>> getAllGames(@RequestParam(required = false, name = "genre") String genre,
+                                                  @RequestParam(required = false, name = "ageRating") String ageRating,
                                                   @RequestParam(required = false, name = "price") Double price,
-                                                  @RequestParam(required = false, name = "name") String name,
-                                                  @RequestParam(required = false, name = "publisher") String publisher){
+                                                  @RequestParam(required = false,name = "name") String name) {
         List<Game> allGames = gameService.getAllGames();
-//         if(genre != null){return new ResponseEntity<>(gameRepository.findByGenre(genre),HttpStatus.OK);}
 
-         if (ageRating != null && genre != null){
-             return new ResponseEntity<>(gameRepository.findByGenreAndAgeRating(genre, ageRating), HttpStatus.OK);}
-//             return new ResponseEntity<>(gameRepository.findByAgeRating(ageRating),HttpStatus.OK);}
+        if (ageRating != null && genre != null) {
+            return new ResponseEntity<>(gameRepository.findByGenreAndAgeRating(genre, ageRating), HttpStatus.OK);
+        }if(name != null){
+            return new ResponseEntity<>(gameRepository.findByName(name),HttpStatus.OK);
+        }
+        if (ageRating != null) {
+            return new ResponseEntity<>(gameRepository.findByAgeRating(ageRating), HttpStatus.OK);
+        }
+        if (price != null) {
+            return new ResponseEntity<>(gameRepository.findByPrice(price), HttpStatus.OK);
+        }
 
-         //Pricing variable needs to be worked on
-         if (price != null){return new ResponseEntity<>(gameRepository.findByPrice(price), HttpStatus.OK);}
-
-         if (name != null){return new ResponseEntity<>(gameRepository.findByName(name), HttpStatus.OK);}
-
-        if (publisher != null){return new ResponseEntity<>(gameRepository.findByPublisher(publisher), HttpStatus.OK);}
-
-         else {
-             // TODO: Ignore list of players when showing All Games
-             return new ResponseEntity<>(allGames, HttpStatus.OK);
-         }
+        else {
+            // TODO: Ignore list of players when showing All Games
+            return new ResponseEntity<>(allGames, HttpStatus.OK);
+        }
     }
+
+
 
     //Get games by ID
     @GetMapping(value = "/{id}")
