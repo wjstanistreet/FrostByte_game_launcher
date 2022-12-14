@@ -52,7 +52,9 @@ public class AccountService {
         Account account = accountRepository.findById(accountId).get();
         double gamePrice = gameRepository.findById(gameId).get().getPrice();
         double currentWallet = account.getWallet();
-        account.setWallet(currentWallet - gamePrice);
+        double updatedWallet = currentWallet - gamePrice;
+        double roundedWallet = Math.round(updatedWallet * 100.0) / 100.0;
+        account.setWallet(roundedWallet);
         accountRepository.save(account);
         return account;
     }
