@@ -24,7 +24,7 @@ public class GameController {
     @Autowired
     GameRepository gameRepository;
 
-    //Todo: Getting games with filters for genre, ageRating and price Expect price everything is done
+    //Todo: Getting games with filters for genre, ageRating and price. DONE§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§
     @GetMapping
     public ResponseEntity<List<Game>> getAllGames(@RequestParam(required = false,name = "genre")String genre,
                                                   @RequestParam(required = false,name = "ageRating")String ageRating,
