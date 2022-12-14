@@ -59,4 +59,11 @@ public class AccountService {
         return account;
     }
 
+    public boolean checkGameInAccount(long accountId, long gameId){
+        Account account = accountRepository.findById(accountId).get();
+        List<Game> accountGames = account.getInstallGames();
+        Game game = gameRepository.findById(gameId).get();
+        return (accountGames.contains(game));
+    }
+
 }

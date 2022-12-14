@@ -71,16 +71,17 @@ public class AccountController {
     public ResponseEntity<Reply> addGameToAccount(@RequestBody InstallGameDTO installGameDTO, @PathVariable long id){
         long gameId = installGameDTO.getGameId();
         Account account = accountRepository.findById(id).get();
-        Reply reply = new Reply();
         if (accountService.checkEnoughMoney(id, gameId)){
+            if (accountService.checkGameInAccount(id, gameId)){
+                Reply reply = new Reply("Transaction failed: Game already in account", account);
+                return new ResponseEntity<>(reply, HttpStatus.FORBIDDEN);
+            }
             Account updatedAccount = accountService.addGameToAccount(id, gameId);
             updatedAccount = accountService.updateBalance(id, gameId);
-            reply.setMessage("Purchase successful");
-            reply.setAccountStatus(updatedAccount);
+            Reply reply = new Reply("Purchase successful: Enjoy the game!", updatedAccount);
             return new ResponseEntity<>(reply, HttpStatus.OK);
         } else {
-            reply.setMessage("Transaction failed");
-            reply.setAccountStatus(account);
+            Reply reply = new Reply("Transaction failed: Insufficient funds", account);
             return new ResponseEntity<>(reply, HttpStatus.FORBIDDEN);
         }
     }
