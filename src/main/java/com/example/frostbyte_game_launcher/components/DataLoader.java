@@ -326,7 +326,7 @@ public class DataLoader implements ApplicationRunner {
         Account accountOne = new Account("Will Stanistreet", "12345", "01/01/1992", "will@will.com" );
         accountOne.setWallet(100);
         accountRepository.save(accountOne);
-        Account accountTwo = new Account("Shiyi Zhu", "88886", "08/08/1988", "shiyi@shiyi.com");
+        Account accountTwo = new Account("Shiyi Zhu", "88886", "08/08/2008", "shiyi@shiyi.com");
         accountTwo.setWallet(160);
         accountRepository.save(accountTwo);
         Account accountThree = new Account("Eesaa Sheikh", "63729", "05/01/1996", "eesaa@eesaa.com");
@@ -339,7 +339,7 @@ public class DataLoader implements ApplicationRunner {
         //Adding games to accounts
         accountService.addGameToAccount(godOfWar, accountOne);
         accountService.addGameToAccount(godOfWar, accountFour);
-        accountService.addGameToAccount(eldenRing, accountTwo);
+        accountService.addGameToAccount(eldenRing, accountThree);
 
         accountRepository.save(accountOne);
         accountRepository.save(accountFour);
