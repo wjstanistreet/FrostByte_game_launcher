@@ -7,6 +7,9 @@ import com.example.frostbyte_game_launcher.repositories.GameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,6 +43,42 @@ public class AccountService {
         account.setInstallGames(gameList);
         accountRepository.save(account);
         return account;
+    }
+
+    //if the wallet in account have enough money, then return true;
+    public boolean checkEnoughMoney(long accountId, long gameId){
+        double accountWallet = accountRepository.findById(accountId).get().getWallet();
+        double gamePrice = gameRepository.findById(gameId).get().getPrice();
+        return (accountWallet >= gamePrice);
+    }
+
+    //if the purchase is successful, then update the wallet balance;
+    public Account updateBalance(long accountId, long gameId){
+        Account account = accountRepository.findById(accountId).get();
+        double gamePrice = gameRepository.findById(gameId).get().getPrice();
+        double currentWallet = account.getWallet();
+        double updatedWallet = currentWallet - gamePrice;
+        double roundedWallet = Math.round(updatedWallet * 100.0) / 100.0;
+        account.setWallet(roundedWallet);
+        accountRepository.save(account);
+        return account;
+    }
+
+    //if game already in account, then return true;
+    public boolean checkGameInAccount(long accountId, long gameId){
+        Account account = accountRepository.findById(accountId).get();
+        List<Game> accountGames = account.getInstallGames();
+        Game game = gameRepository.findById(gameId).get();
+        return (accountGames.contains(game));
+    }
+
+    //if age reaches the game age rating restriction, then return true;
+    public boolean ageCheck(long accountId, long gameId){
+        Account account = accountRepository.findById(accountId).get();
+        int age = account.yearByDOB();
+        Game game = gameRepository.findById(gameId).get();
+        int ratingAsInt = Integer.valueOf(game.getAgeRating());
+        return(age >= ratingAsInt);
     }
 
 }

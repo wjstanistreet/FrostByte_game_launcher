@@ -138,11 +138,11 @@ public class DataLoader implements ApplicationRunner {
         gameRepository.save(fifa05);
 
         Game madden22 = new Game("Madden 22", "Katy Livingston",
-                69.99,"Sport", "PG");
+                69.99,"Sport", "3");
         gameRepository.save(madden22);
 
         Game nba2K22 = new Game("NBA 2K22", "Katy Livingston",
-                32.99,"Sport", "PG");
+                32.99,"Sport", "3");
         gameRepository.save(darkSouls3);
 
         Game streetFighter5 = new Game("Street Fighter 5", "Takayuki Nakayama",
@@ -222,7 +222,7 @@ public class DataLoader implements ApplicationRunner {
         gameRepository.save(farCry3);
 
         Game tetris= new Game("Tetris", "Amaury Watine", 52.99,
-                "Puzzle", "U");
+                "Puzzle", "3");
         gameRepository.save(tetris);
 
         Game monumentValley= new Game("Monument Valley", "Sam Crisp ", 17.99,
@@ -324,18 +324,22 @@ public class DataLoader implements ApplicationRunner {
 
         //Account Creation
         Account accountOne = new Account("Will Stanistreet", "12345", "01/01/1992", "will@will.com" );
+        accountOne.setWallet(100);
         accountRepository.save(accountOne);
-        Account accountTwo = new Account("Shiyi Zhu", "88886", "08/08/1988", "shiyi@shiyi.com");
+        Account accountTwo = new Account("Shiyi Zhu", "88886", "08/08/2008", "shiyi@shiyi.com");
+        accountTwo.setWallet(160);
         accountRepository.save(accountTwo);
         Account accountThree = new Account("Eesaa Sheikh", "63729", "05/01/1996", "eesaa@eesaa.com");
+        accountThree.setWallet(500);
         accountRepository.save(accountThree);
         Account accountFour = new Account("Fatimah Patel", "11111", "03/03/1993", "fatimah@fatimah.com");
+        accountFour.setWallet(120);
         accountRepository.save(accountFour);
 
         //Adding games to accounts
         accountService.addGameToAccount(godOfWar, accountOne);
         accountService.addGameToAccount(godOfWar, accountFour);
-        accountService.addGameToAccount(eldenRing, accountTwo);
+        accountService.addGameToAccount(eldenRing, accountThree);
 
         accountRepository.save(accountOne);
         accountRepository.save(accountFour);
