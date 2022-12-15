@@ -3,7 +3,7 @@
 ---
 
 ## Project Description
-![./diagrams/FrostByte_Logo.png](FrostByte Team Logo)
+![FrostByte Team Logo](./diagrams/FrostByte_Logo.png)
 
 A game launcher is an integral part of the gaming experience, serving as a bridge between the user and the games they know and love. This launcher will hold different user accounts and their respective collections of games, as well as a game library filled with many games that are out there in the world. 
 
