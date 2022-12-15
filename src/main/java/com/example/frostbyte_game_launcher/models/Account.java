@@ -7,7 +7,9 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "accounts")
@@ -32,12 +34,23 @@ public class Account {
     @Column
     private double wallet;
 
+
+    //Friends Type list
+    @ManyToOne (cascade = CascadeType.ALL)
+    @JoinColumn (name = "friends")
+    private Account friends;
+
+    @OneToMany(mappedBy = "friendsList")
+    private Set<Account> friendsList = new HashSet<Account>();
+//§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§
+
     @ManyToMany
     @JoinTable (name = "accounts_games",
     joinColumns = @JoinColumn(name = "account_id"),
     inverseJoinColumns = @JoinColumn(name = "game_id"))
     @JsonIgnoreProperties({"players"})
     private List<Game> installGames;
+
 
     public Account (){};
 
@@ -48,6 +61,7 @@ public class Account {
         this.email = email;
         this.installGames = new ArrayList<>();
         this.wallet = 0;
+        this.friendsList = new HashSet<Account>();
     }
 
     public long getId() {
@@ -104,6 +118,18 @@ public class Account {
 
     public void setWallet(double wallet) {
         this.wallet = wallet;
+    }
+
+    public Set<Account> getFriendsList() {
+        return friendsList;
+    }
+
+    public void setFriendsList(Set<Account> friendsList) {
+        this.friendsList = friendsList;
+    }
+
+    public void setFriends(Account friends) {
+        this.friends = friends;
     }
 
     //convert String dateOfBirth to LocalDate DOB and return age in years;

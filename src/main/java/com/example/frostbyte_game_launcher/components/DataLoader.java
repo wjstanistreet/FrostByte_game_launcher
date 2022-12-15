@@ -10,6 +10,8 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
+import java.util.HashSet;
+
 @Component
 public class DataLoader implements ApplicationRunner {
 
@@ -344,6 +346,14 @@ public class DataLoader implements ApplicationRunner {
         accountRepository.save(accountOne);
         accountRepository.save(accountFour);
         accountRepository.save(accountTwo);
+
+        HashSet<Account>testFriends = new HashSet<>();
+        testFriends.add(accountOne);
+        testFriends.add(accountThree);
+
+        accountTwo.setFriendsList(testFriends);
+        accountThree.setFriendsList(testFriends);
+        accountRepository.save(testFriends);
 
     }
 
