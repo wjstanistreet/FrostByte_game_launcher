@@ -36,11 +36,9 @@ public class Account {
 
     //Friends Type list
     @ManyToMany
+    @JsonIgnoreProperties({"friends", "installGames"})
     private Set<Account> friends = new HashSet<>();
 
-//    @ManyToMany(mappedBy = "friends")
-//    private Set<Account> friendsList = new HashSet<Friendship>();
-////§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§
 
     @ManyToMany
     @JoinTable (name = "accounts_games",
