@@ -349,11 +349,14 @@ public class DataLoader implements ApplicationRunner {
 
         HashSet<Account>testFriends = new HashSet<>();
         testFriends.add(accountOne);
-        testFriends.add(accountThree);
+        testFriends.add(accountFour);
 
-        accountTwo.setFriendsList(testFriends);
-        accountThree.setFriendsList(testFriends);
-        accountRepository.save(testFriends);
+
+        accountTwo.getFriends().add(accountThree);
+        accountThree.setFriends(testFriends);
+
+        accountRepository.save(accountTwo);
+        accountRepository.save(accountThree);
 
     }
 

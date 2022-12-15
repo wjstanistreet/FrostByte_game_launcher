@@ -34,15 +34,13 @@ public class Account {
     @Column
     private double wallet;
 
-
     //Friends Type list
-    @ManyToOne (cascade = CascadeType.ALL)
-    @JoinColumn (name = "friends")
-    private Account friends;
+    @ManyToMany
+    private Set<Account> friends = new HashSet<>();
 
-    @OneToMany(mappedBy = "friendsList")
-    private Set<Account> friendsList = new HashSet<Account>();
-//§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§
+//    @ManyToMany(mappedBy = "friends")
+//    private Set<Account> friendsList = new HashSet<Friendship>();
+////§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§
 
     @ManyToMany
     @JoinTable (name = "accounts_games",
@@ -61,7 +59,7 @@ public class Account {
         this.email = email;
         this.installGames = new ArrayList<>();
         this.wallet = 0;
-        this.friendsList = new HashSet<Account>();
+//        this.friendsList = new HashSet<Friendship>();
     }
 
     public long getId() {
@@ -120,17 +118,17 @@ public class Account {
         this.wallet = wallet;
     }
 
-    public Set<Account> getFriendsList() {
-        return friendsList;
+    public Set<Account> getFriends() {
+        return friends;
     }
 
-    public void setFriendsList(Set<Account> friendsList) {
-        this.friendsList = friendsList;
-    }
-
-    public void setFriends(Account friends) {
+    public void setFriends(Set<Account> friends) {
         this.friends = friends;
     }
+
+//    public void setFriends(Account friends) {
+//        this.friends = friends;
+//    }
 
     //convert String dateOfBirth to LocalDate DOB and return age in years;
     public int yearByDOB(){
