@@ -328,8 +328,13 @@ public class DataLoader implements ApplicationRunner {
                 "Sport", "16");
         gameRepository.save(wwe13);
 
+        //Achievements creation
         Achievement godOfWarAchievementOne = new Achievement("The Journey Begins.", "Bronze", godOfWar);
         achievementRepository.save(godOfWarAchievementOne);
+        Achievement godOfWarAchievementTwo = new Achievement("A new friend", "Bronze", godOfWar);
+        achievementRepository.save(godOfWarAchievementTwo);
+        Achievement godOfWarAchievementThree = new Achievement("Feels like home", "Bronze", godOfWar);
+        achievementRepository.save(godOfWarAchievementThree);
 
         //Account Creation
         Account accountOne = new Account("Will Stanistreet", "12345", "01/01/1992", "will@will.com" );
