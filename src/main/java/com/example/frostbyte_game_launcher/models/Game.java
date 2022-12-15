@@ -33,7 +33,7 @@ public class Game {
     @JsonIgnoreProperties({"installGames"})
     private List<Account> players;
 
-    public Game(){};
+    public Game(){}
 
     public Game(String name, String publisher, Double price, String genre, String ageRating){
         this.name = name;

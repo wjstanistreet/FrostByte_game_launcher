@@ -1,9 +1,27 @@
 package com.example.frostbyte_game_launcher.models;
 
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "achievements")
 public class Achievement {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
+    @Column(name = "name")
     private String name;
+
+    @Column(name = "type")
     private String type;
+
+    @ManyToOne
+    @JoinColumn(name = "game_id")
+    @JsonIgnoreProperties("achievements")
     private Game game;
 
     public Achievement(){}

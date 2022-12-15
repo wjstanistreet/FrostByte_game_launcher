@@ -31,7 +31,7 @@ public class Account {
     @Column(name = "email")
     private String email;
 
-    @Column
+    @Column(name = "wallet")
     private double wallet;
 
     //Friends Type list
@@ -48,7 +48,7 @@ public class Account {
     private List<Game> installGames;
 
 
-    public Account (){};
+    public Account (){}
 
     public Account(String name, String password, String dateOfBirth, String email){
         this.name = name;
