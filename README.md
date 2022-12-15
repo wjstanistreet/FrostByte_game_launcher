@@ -52,7 +52,7 @@ The FrostByte launcher is able to do the following:
 
 The key classes and their database relationships can be viewed in this UML diagram and ERD:
 
-<img src="https://github.com/wjstanistreet/diagrams/FrostByte_UML_ERD.png" alt="FrostByte Launcher UML and ERD">
+![FrostByte Launcher UML and ERD](./diagrams/FrostByte_UML_ERD.png)
 
 ---
 
