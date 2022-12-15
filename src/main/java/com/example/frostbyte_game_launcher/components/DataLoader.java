@@ -1,8 +1,10 @@
 package com.example.frostbyte_game_launcher.components;
 
 import com.example.frostbyte_game_launcher.models.Account;
+import com.example.frostbyte_game_launcher.models.Achievement;
 import com.example.frostbyte_game_launcher.models.Game;
 import com.example.frostbyte_game_launcher.repositories.AccountRepository;
+import com.example.frostbyte_game_launcher.repositories.AchievementRepository;
 import com.example.frostbyte_game_launcher.repositories.GameRepository;
 import com.example.frostbyte_game_launcher.services.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +25,11 @@ public class DataLoader implements ApplicationRunner {
 
     @Autowired
     AccountService accountService;
+    private final AchievementRepository achievementRepository;
 
-    public DataLoader(){}
+    public DataLoader(AchievementRepository achievementRepository){
+        this.achievementRepository = achievementRepository;
+    }
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
@@ -323,6 +328,8 @@ public class DataLoader implements ApplicationRunner {
                 "Sport", "16");
         gameRepository.save(wwe13);
 
+        Achievement godOfWarAchievementOne = new Achievement("The Journey Begins.", "Bronze", godOfWar);
+        achievementRepository.save(godOfWarAchievementOne);
 
         //Account Creation
         Account accountOne = new Account("Will Stanistreet", "12345", "01/01/1992", "will@will.com" );
