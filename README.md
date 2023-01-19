@@ -5,14 +5,13 @@
 ## Project Description
 ![FrostByte Team Logo](./diagrams/FrostByte_Logo.png)
 
-A game launcher is an integral part of the gaming experience, serving as a bridge between the user and the games they know and love. This launcher will hold different user accounts and their respective collections of games, as well as a game library filled with many games that are out there in the world. 
+A game launcher is an integral part of the gaming experience, serving as a bridge between the user and the games they know and love. This launcher allows users to create accounts and purchase games to their collections from a library filled with many games that are out there in the world. 
 
 These technologies are **vital** to run this application:
 
 | Technology  | Version |
 |-------------|---------|
 | Java        | 17      |
-| Spring Boot | 2.7.6   |
 | PostgreSQL  | 14.5    |
 
 ---
@@ -36,6 +35,9 @@ $ git clone https://github.com/wjstanistreet/FrostByte_game_launcher.git
 $ createdb gameLauncherDB
 ```
 You should now be able to run FrostByte!
+> Note: If you clone this repository in its entirety, you will not need to install anything for Spring Boot to use/develop FrostByte.  
+
+5. You can use an API platform, like [Postman](https://www.postman.com/downloads/), to test the routes. 
 
 ---
 
@@ -58,7 +60,7 @@ The key classes and their database relationships can be viewed in this UML diagr
 
 ## Example Routes
 
-These are some example routes that our API can provide. This is not an exhaustive list, so check out the controllers to see what you can do!
+These are some example routes that our API can provide. They can be tested using Postman. This is not an exhaustive list, so check out the controllers to see what you can do!
 
 ### Account:
 
@@ -80,8 +82,6 @@ These are some example routes that our API can provide. This is not an exhaustiv
 | /games/1 | GET  | Read game by id |  { </br> "id": 1, </br> "name": "God Of War", </br>   "publisher": "Corey Barlog", </br> "price": 30.0, </br> "genre": "Fantasy", </br> "ageRating": "18", </br> "players": [] </br> }|
 | /games?ageRating=3 | GET  | Read all games through ageRating filter | { </br> "id": 5, </br> "name": "Forza Horizon", </br> "publisher": "Bill Gates", </br> "price": 68.99, </br> "genre": "Racing", </br> "ageRating": "3", </br> "players": [] </br> }, </br> { </br> "id": 6, ...|
 | /games?ageRating=18&genre=Action | GET | Read all games through ageRating and genre filter | [ </br> { </br> "id": 3, </br> "name": "Devil May Cry", </br> "publisher": "Hideaki Itsuno", </br> "price": 50.0, </br> "genre": "Action", </br> "ageRating": "18", </br> "players": [] </br> }, </br> { </br> "id": 6,  ...|
-
-
 ---
 
 ## Extensions
@@ -97,3 +97,12 @@ These are some example routes that our API can provide. This is not an exhaustiv
 - [ ] Develop filters to view games in common with friends
 - [ ] Add properties to Game and Account for further customisation, e.g. Account photos and Box art
 
+---
+## Known Quirks
+
+- Some combinations of Game search-queries might not produce the correct list of items, specifically:
+    - Age rating and price.
+    - Genre, age rating, and price.
+    - Publisher and other parameters.
+    - Game name and other parameters.
+    
